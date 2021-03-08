@@ -31,6 +31,7 @@ namespace fuzzylogic
         LinguisticVariable myAngle, myDistance, myAdjAngle;
         FuzzyRuleCollection myRules;
         FuzzyEngine fe;
+        double r1, r2, r3, r4, r5, r6, r7, r8, r9;
         public MainWindow()
         {
             InitializeComponent();
@@ -108,30 +109,22 @@ namespace fuzzylogic
             myAngle.InputValue = obsAngle;
 
             myDistance.InputValue = obstacleDist;
-
-            double w1 = myAngle.Fuzzify("SMALL") * myDistance.Fuzzify("NEAR");
-            double w2 = myAngle.Fuzzify("SMALL") * myDistance.Fuzzify("FAR");
-            double w3 = myAngle.Fuzzify("SMALL") * myDistance.Fuzzify("VERYFAR");
-            double w4 = myAngle.Fuzzify("MEDIUM") * myDistance.Fuzzify("NEAR");
-            double w5 = myAngle.Fuzzify("MEDIUM") * myDistance.Fuzzify("FAR");
-            double w6 = myAngle.Fuzzify("MEDIUM") * myDistance.Fuzzify("VERYFAR");
-            double w7 = myAngle.Fuzzify("LARGE") * myDistance.Fuzzify("NEAR");
-            double w8 = myAngle.Fuzzify("LARGE") * myDistance.Fuzzify("FAR");
-            double w9 = myAngle.Fuzzify("LARGE") * myDistance.Fuzzify("VERYFAR");
+            setRules();
+            
 
 
             Double temp;
-            temp = (w1 * 90) + (w2 * 55) + (w3 * 35) +
-                    (w4 * 55) + (w5 * 35) + (w6 * 20) +
-                    (w7 * 35) + (w8 * 20) + (w9 * 5);
+            temp = (r1) + (r2) + (r3) +
+                    (r4) + (r5) + (r6) +
+                    (r7) + (r8) + (r9);
 
-            if ((w1 + w2 + w3 + w4 + w5 + w6 + w7 + w8 + w9) == 0)
+            if (((r1/90) + (r2/55) + (r3/35) + (r4/55) + (r5/35) + (r6/20) + (r7/35) + (r8/20) + (r9/5)) == 0)
             {
                 return 0;
             }
             else
             {
-                return temp / (w1 + w2 + w3 + w4 + w5 + w6 + w7 + w8 + w9);
+                return temp / ((r1 / 90) + (r2 / 55) + (r3 / 35) + (r4 / 55) + (r5 / 35) + (r6 / 20) + (r7 / 35) + (r8 / 20) + (r9 / 5));
             }
         }
         public void setMembers()
@@ -159,6 +152,17 @@ namespace fuzzylogic
 
         public void setRules()
         {
+
+            r1 = myAngle.Fuzzify("SMALL") * myDistance.Fuzzify("NEAR")*90;
+            r2 = myAngle.Fuzzify("SMALL") * myDistance.Fuzzify("FAR")*55;
+            r3 = myAngle.Fuzzify("SMALL") * myDistance.Fuzzify("VERYFAR")*35;
+            r4 = myAngle.Fuzzify("MEDIUM") * myDistance.Fuzzify("NEAR")*55;
+            r5 = myAngle.Fuzzify("MEDIUM") * myDistance.Fuzzify("FAR")*35;
+            r6 = myAngle.Fuzzify("MEDIUM") * myDistance.Fuzzify("VERYFAR")*20;
+            r7 = myAngle.Fuzzify("LARGE") * myDistance.Fuzzify("NEAR")*35;
+            r8 = myAngle.Fuzzify("LARGE") * myDistance.Fuzzify("FAR")*20;
+            r9 = myAngle.Fuzzify("LARGE") * myDistance.Fuzzify("VERYFAR")*5;
+            /*
             myRules = new FuzzyRuleCollection();
             myRules.Add(new FuzzyRule("IF (ANGLE IS SMALL) AND (DISTANCE IS NEAR) THEN ADJANGLE IS MS"));
             myRules.Add(new FuzzyRule("IF (ANGLE IS SMALL) AND (DISTANCE IS FAR) THEN ADJANGLE IS VS"));
@@ -169,6 +173,7 @@ namespace fuzzylogic
             myRules.Add(new FuzzyRule("IF (ANGLE IS LARGE) AND (DISTANCE IS NEAR) THEN ADJANGLE IS S"));
             myRules.Add(new FuzzyRule("IF (ANGLE IS LARGE) AND (DISTANCE IS FAR) THEN ADJANGLE IS LS"));
             myRules.Add(new FuzzyRule("IF (ANGLE IS LARGE) AND (DISTANCE IS VERYFAR) THEN ADJANGLE IS SS"));
+            */
         }
 
         public void setFuzzyEngine()
