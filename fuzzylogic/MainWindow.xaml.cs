@@ -22,7 +22,10 @@ namespace fuzzylogic
     /// </summary>
     public partial class MainWindow : Window
     {
+        int count = 0;
         Car car;
+        List<double> coneListx = new List<double>();
+        List<double> coneListy = new List<double>();
         Boolean animationStart = false;
         MembershipFunctionCollection angle,distance,adjangle ;
         LinguisticVariable myAngle,myDistance, myAdjAngle;
@@ -47,27 +50,27 @@ namespace fuzzylogic
 
             if (!animationStart)
             {
-                DoubleAnimation sprite1 = new DoubleAnimation(Canvas.GetTop(sprPerson5) + 150, TimeSpan.FromSeconds(5));
-                sprite1.AutoReverse = true;
+               // DoubleAnimation sprite1 = new DoubleAnimation(Canvas.GetTop(sprPerson5) + 150, TimeSpan.FromSeconds(5));
+               // sprite1.AutoReverse = true;
                 animationStart = true;
-                sprite1.Completed += new EventHandler(Animation_Completed);
+              //  sprite1.Completed += new EventHandler(Animation_Completed);
 
-                sprPerson5.BeginAnimation(Canvas.TopProperty, sprite1);
+               // sprPerson5.BeginAnimation(Canvas.TopProperty, sprite1);
             }
         }
 
         void Animation_Completed(object sender, EventArgs e)
         {
-            DoubleAnimation sprite1 = new DoubleAnimation(Canvas.GetTop(sprPerson5) + 150, TimeSpan.FromSeconds(5));
-            sprite1.AutoReverse = true;
+           // DoubleAnimation sprite1 = new DoubleAnimation(Canvas.GetTop(sprPerson5) + 150, TimeSpan.FromSeconds(5));
+           // sprite1.AutoReverse = true;
             animationStart = true;
-            sprite1.Completed += Animation_Completed;
+         //   sprite1.Completed += Animation_Completed;
 
-            sprPerson5.BeginAnimation(Canvas.TopProperty, sprite1);
+           // sprPerson5.BeginAnimation(Canvas.TopProperty, sprite1);
 
-            DoubleAnimation sprite2 = new DoubleAnimation(Canvas.GetRight(sprPerson4) - 150, TimeSpan.FromSeconds(5));
-            sprite2.AutoReverse = true;
-            sprPerson4.BeginAnimation(Canvas.RightProperty, sprite2);
+           // DoubleAnimation sprite2 = new DoubleAnimation(Canvas.GetRight(sprPerson4) - 150, TimeSpan.FromSeconds(5));
+          //  sprite2.AutoReverse = true;
+          ///  sprPerson4.BeginAnimation(Canvas.RightProperty, sprite2);
         }
 
         private void AnimateCar()
@@ -88,7 +91,7 @@ namespace fuzzylogic
            
             DoubleAnimation sprCarX = new DoubleAnimation(car.xPos, TimeSpan.FromMilliseconds(car.xDuration));
             DoubleAnimation sprCarY = new DoubleAnimation(car.yPos, TimeSpan.FromMilliseconds(car.yDuration));
-            Console.WriteLine("DSADA");
+           // Console.WriteLine("DSADA");
 
             if (!DestinationReached())
             {
@@ -124,23 +127,23 @@ namespace fuzzylogic
             myDistance.InputValue = obstacleDist;
             
             double w1 = myAngle.Fuzzify("SMALL") * myDistance.Fuzzify("NEAR");
-            Console.WriteLine(w1+"w1");
+            //Console.WriteLine(w1+"w1");
             double w2 = myAngle.Fuzzify("SMALL") * myDistance.Fuzzify("FAR");
-            Console.WriteLine(w2 + "w2");
+           // Console.WriteLine(w2 + "w2");
             double w3 = myAngle.Fuzzify("SMALL") * myDistance.Fuzzify("VERYFAR");
-            Console.WriteLine(w3 + "w3");
+           // Console.WriteLine(w3 + "w3");
             double w4 = myAngle.Fuzzify("MEDIUM") * myDistance.Fuzzify("NEAR");
-            Console.WriteLine(w4 + "w4");
+            //Console.WriteLine(w4 + "w4");
             double w5 = myAngle.Fuzzify("MEDIUM") * myDistance.Fuzzify("FAR");
-            Console.WriteLine(w5 + "w5");
+           // Console.WriteLine(w5 + "w5");
             double w6 = myAngle.Fuzzify("MEDIUM") * myDistance.Fuzzify("VERYFAR");
-            Console.WriteLine(w6 + "w6");
+           // Console.WriteLine(w6 + "w6");
             double w7 = myAngle.Fuzzify("LARGE") * myDistance.Fuzzify("NEAR");
-            Console.WriteLine(w7 + "w7");
+           // Console.WriteLine(w7 + "w7");
             double w8 = myAngle.Fuzzify("LARGE") * myDistance.Fuzzify("FAR");
-            Console.WriteLine(w8 + "w8");
+           // Console.WriteLine(w8 + "w8");
             double w9 = myAngle.Fuzzify("LARGE") * myDistance.Fuzzify("VERYFAR");
-            Console.WriteLine(w9 + "w9");
+           // Console.WriteLine(w9 + "w9");
 
             Double temp;
             temp = (w1 * 90) + (w2 * 55) + (w3 * 35) +
@@ -211,27 +214,14 @@ namespace fuzzylogic
         {
             
             lblStatus.Content = "Obstacle angle: " + pAngle.ToString() + "Dist: " + obstacleDist.ToString();
-            
-           // myAngle.InputValue = Math.Abs(pAngle);
-           // myAngle.Fuzzify("SMALL");
-           // myDistance.InputValue = obstacleDist;
-           // myDistance.Fuzzify("NEAR");
-           // setFuzzyEngine();
-            //fe.Consequent = "ADJANGLE";
-
-            //Famm famm = new Famm(pAngle, obstacleDist);
 
             Double adjAngle = newDeffuzify(pAngle,obstacleDist);
-            
-
-
-            //if (Math.Abs(adjAngle - pAngle) > 10) { adjAngle /= 2; }
 
             if (pAngle > 0) { adjAngle *= -1; }
-            Console.WriteLine("Car angle in adj angle = " + car.angle + "Adj Angle:"+adjAngle);
+
             if (car.angle + adjAngle > 360) 
             {
-                Console.WriteLine("Greater than 360");
+               Console.WriteLine("Greater than 360");
                 car.angle = (car.angle + adjAngle) - 360; 
             }
             else if (car.angle + adjAngle < 0) 
@@ -249,8 +239,27 @@ namespace fuzzylogic
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            setMembers();
-            setRules();
+            Rectangle r = new Rectangle();
+            r.Height = 50;
+            r.Width = 50;
+            r.Name = "Cone" + count;
+            Random rand = new Random();
+            ImageBrush imgBrush = new ImageBrush();
+
+            imgBrush.ImageSource = new BitmapImage(new Uri( "C:/Users/Peterson/source/repos/fuzzylogic/fuzzylogic/Images/tcone.ico", UriKind.Relative));
+            imgBrush.Stretch = Stretch.Fill;
+            imgBrush.AlignmentX = AlignmentX.Center;
+            imgBrush.AlignmentY = AlignmentY.Center;
+
+            r.Fill = imgBrush;
+            mainCanvas.Children.Add(r);
+            coneListx.Add(rand.Next(100, 550));
+            coneListy.Add(rand.Next(75, 250));
+          
+            Canvas.SetRight(r, coneListx[count]);
+            Canvas.SetTop(r, coneListy[count]);
+            count++;
+
         }
 
         private void CheckForCollision()
@@ -260,81 +269,25 @@ namespace fuzzylogic
 
             Double adjAngle = 360, adjDistance = 10000;
 
-            carPosition.X = Canvas.GetRight(sprPerson1);// + 25;
-            carPosition.Y = Canvas.GetTop(sprPerson1) + 10;
-
-            if (car.CheckCollsions(ref obstacleDist, carPosition, ref pAngle))
+            for (int i = 0; i < count; i++)
             {
-                if (obstacleDist < adjDistance)
+                string name = "Cone" + i;
+
+                carPosition.X = coneListx[i];// + 25;
+                carPosition.Y = coneListy[i] + 10;
+                if (car.CheckCollsions(ref obstacleDist, carPosition, ref pAngle))
                 {
-                    adjAngle = pAngle;
-                   
-
-                    adjDistance = obstacleDist;
+                    if (obstacleDist < adjDistance)
+                    {
+                        adjAngle = pAngle;
+                        adjDistance = obstacleDist;
+                       
+                    }
+                    //adjustAngle(pAngle, obstacleDist);
                 }
-                //adjustAngle(pAngle, obstacleDist);
+              
             }
-
-            carPosition.X = Canvas.GetRight(sprPerson2);// + 25;
-            carPosition.Y = Canvas.GetTop(sprPerson2) + 10;
-
-            if (car.CheckCollsions(ref obstacleDist, carPosition, ref pAngle))
-            {
-                if (obstacleDist < adjDistance)
-                {
-                    adjAngle = pAngle;
-
-        
-                    adjDistance = obstacleDist;
-                }
-                //adjustAngle(pAngle, obstacleDist);
-            }
-
-            carPosition.X = Canvas.GetRight(sprPerson3);// + 25;
-            carPosition.Y = Canvas.GetTop(sprPerson3) + 10;
-
-            if (car.CheckCollsions(ref obstacleDist, carPosition, ref pAngle))
-            {
-                if (obstacleDist < adjDistance)
-                {
-                    adjAngle = pAngle;
-
-         
-                    adjDistance = obstacleDist;
-                }
-                //adjustAngle(pAngle, obstacleDist);
-            }
-
-            carPosition.X = Canvas.GetRight(sprPerson4);// + 25;
-            carPosition.Y = Canvas.GetTop(sprPerson4) + 10;
-
-            if (car.CheckCollsions(ref obstacleDist, carPosition, ref pAngle))
-            {
-                if (obstacleDist < adjDistance)
-                {
-                    adjAngle = pAngle;
-
-                
-                    adjDistance = obstacleDist;
-                }
-                //adjustAngle(pAngle, obstacleDist);
-            }
-
-            carPosition.X = Canvas.GetRight(sprPerson5);// + 25;
-            carPosition.Y = Canvas.GetTop(sprPerson5) + 10;
-
-            if (car.CheckCollsions(ref obstacleDist, carPosition, ref pAngle))
-            {
-                if (obstacleDist < adjDistance)
-                {
-                    adjAngle = pAngle;
-     
-                   
-                    adjDistance = obstacleDist;
-                }
-                //adjustAngle(pAngle, obstacleDist);
-            }
-            
+      
             if (adjDistance < 10000) {
         
                 adjustAngle(adjAngle, adjDistance);
@@ -367,7 +320,7 @@ namespace fuzzylogic
         private void UpdateStatistics()
         {
             lblAngle.Content = car.angle.ToString();
-            //lblDestination.Content = "x: " + car.xDestination.ToString() + "  y:" + car.yDestination.ToString();
+         ;
         }
     }
 }

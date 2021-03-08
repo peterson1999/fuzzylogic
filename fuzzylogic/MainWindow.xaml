@@ -8,32 +8,8 @@
         Title="Main Window" Height="420" MouseLeftButtonUp="NewDestination" Width="700" Loaded="btnAnimateClick">
 
     <Canvas x:Name="mainCanvas">
-
-            <Rectangle x:Name="sprPerson1" Width="50" Height="50" Canvas.Right="300" Canvas.Top="75"  >
-                <Rectangle.Fill >
-                    <ImageBrush ImageSource="C:/Users/Peterson/source/repos/fuzzylogic/fuzzylogic/Images/lilastoy.ico" Stretch="Fill" AlignmentX="Center" AlignmentY="Center" />
-                </Rectangle.Fill>
-            </Rectangle>
-            <Rectangle x:Name="sprPerson2" Width="50" Height="50" Canvas.Right="400" Canvas.Top="210" >
-                <Rectangle.Fill >
-                    <ImageBrush ImageSource="C:/Users/Peterson/source/repos/fuzzylogic/fuzzylogic/Images/MaskToy.ico" Stretch="Fill" AlignmentX="Center" AlignmentY="Center" />
-                </Rectangle.Fill>
-            </Rectangle>
-            <Rectangle x:Name="sprPerson3" Width="50" Height="50" Canvas.Right="270" Canvas.Top="250" >
-                <Rectangle.Fill >
-                    <ImageBrush ImageSource="C:/Users/Peterson/source/repos/fuzzylogic/fuzzylogic/Images/orangeToy.ico" Stretch="Fill" AlignmentX="Center" AlignmentY="Center" />
-                </Rectangle.Fill>
-            </Rectangle>
-            <Rectangle x:Name="sprPerson4" Width="50" Height="50" Canvas.Right="550" Canvas.Top="150" >
-                <Rectangle.Fill >
-                    <ImageBrush ImageSource="C:/Users/Peterson/source/repos/fuzzylogic/fuzzylogic/Images/redToy.ico" Stretch="Fill" AlignmentX="Center" AlignmentY="Center" />
-                </Rectangle.Fill>
-            </Rectangle>
-            <Rectangle x:Name="sprPerson5" Width="50" Height="50" Canvas.Right="100" Canvas.Top="145" >
-                <Rectangle.Fill >
-                    <ImageBrush ImageSource="C:/Users/Peterson/source/repos/fuzzylogic/fuzzylogic/Images/ToothToy.ico" Stretch="Fill" AlignmentX="Center" AlignmentY="Center" />
-                </Rectangle.Fill>
-            </Rectangle>
+        
+        
             <Rectangle x:Name="sprTarget" Width="50" Height="50" Canvas.Right="50" Canvas.Top="37" >
                 <Rectangle.Fill >
                     <ImageBrush ImageSource="C:/Users/Peterson/source/repos/fuzzylogic/fuzzylogic/Images/Target.png" Stretch="Fill" AlignmentX="Center" AlignmentY="Center" />
@@ -48,7 +24,7 @@
             <Label x:Name ="lblAngle" Width="300" Height="25" Canvas.Top="0" />
             <Label x:Name ="lblStatus" Width="400" Height="25" Canvas.Bottom="0" />
 
-        <Button Content="Create Fuzzy Logic" HorizontalAlignment="Left" VerticalAlignment="Top" Width="148" Margin="10,10,0,0" Click="Button_Click"/>
+        <Button Content="Add Obstacle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="148" Margin="10,10,0,0" Click="Button_Click"/>
     </Canvas>
 
 </Window>
