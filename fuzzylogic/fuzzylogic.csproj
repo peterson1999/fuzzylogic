@@ -105,6 +105,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\floor_bg.jpg" />
+    <Resource Include="Images\nadineTarget.jpg" />
+    <Resource Include="Images\robotCar.png" />
+    <Resource Include="Images\Target.png" />
+    <Resource Include="Images\tcone.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

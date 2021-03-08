@@ -27,8 +27,8 @@ namespace fuzzylogic
         List<double> coneListx = new List<double>();
         List<double> coneListy = new List<double>();
         Boolean animationStart = false;
-        MembershipFunctionCollection angle,distance,adjangle ;
-        LinguisticVariable myAngle,myDistance, myAdjAngle;
+        MembershipFunctionCollection angle, distance, adjangle;
+        LinguisticVariable myAngle, myDistance, myAdjAngle;
         FuzzyRuleCollection myRules;
         FuzzyEngine fe;
         public MainWindow()
@@ -42,40 +42,23 @@ namespace fuzzylogic
 
         private void btnAnimateClick(object sender, EventArgs e)
         {
-
-            
             car.Initialize(Canvas.GetRight(sprCar), Canvas.GetTop(sprCar), 10);
 
             AnimateCar();
 
             if (!animationStart)
             {
-               // DoubleAnimation sprite1 = new DoubleAnimation(Canvas.GetTop(sprPerson5) + 150, TimeSpan.FromSeconds(5));
-               // sprite1.AutoReverse = true;
                 animationStart = true;
-              //  sprite1.Completed += new EventHandler(Animation_Completed);
-
-               // sprPerson5.BeginAnimation(Canvas.TopProperty, sprite1);
             }
         }
 
         void Animation_Completed(object sender, EventArgs e)
         {
-           // DoubleAnimation sprite1 = new DoubleAnimation(Canvas.GetTop(sprPerson5) + 150, TimeSpan.FromSeconds(5));
-           // sprite1.AutoReverse = true;
             animationStart = true;
-         //   sprite1.Completed += Animation_Completed;
-
-           // sprPerson5.BeginAnimation(Canvas.TopProperty, sprite1);
-
-           // DoubleAnimation sprite2 = new DoubleAnimation(Canvas.GetRight(sprPerson4) - 150, TimeSpan.FromSeconds(5));
-          //  sprite2.AutoReverse = true;
-          ///  sprPerson4.BeginAnimation(Canvas.RightProperty, sprite2);
         }
 
         private void AnimateCar()
         {
-            UpdateStatistics();
             Double temp = car.angle;
             car.PointTowardsDestination();
 
@@ -88,10 +71,10 @@ namespace fuzzylogic
             car.MoveInDirection(car.angle);
 
             //Final Direction should be determined before this point
-           
+
             DoubleAnimation sprCarX = new DoubleAnimation(car.xPos, TimeSpan.FromMilliseconds(car.xDuration));
             DoubleAnimation sprCarY = new DoubleAnimation(car.yPos, TimeSpan.FromMilliseconds(car.yDuration));
-           // Console.WriteLine("DSADA");
+
 
             if (!DestinationReached())
             {
@@ -120,30 +103,22 @@ namespace fuzzylogic
         }
         public Double newDeffuzify(double obsAngle, double obstacleDist)
         {
-        
+
             obsAngle = Math.Abs(obsAngle);
             myAngle.InputValue = obsAngle;
-           
+
             myDistance.InputValue = obstacleDist;
-            
+
             double w1 = myAngle.Fuzzify("SMALL") * myDistance.Fuzzify("NEAR");
-            //Console.WriteLine(w1+"w1");
             double w2 = myAngle.Fuzzify("SMALL") * myDistance.Fuzzify("FAR");
-           // Console.WriteLine(w2 + "w2");
             double w3 = myAngle.Fuzzify("SMALL") * myDistance.Fuzzify("VERYFAR");
-           // Console.WriteLine(w3 + "w3");
             double w4 = myAngle.Fuzzify("MEDIUM") * myDistance.Fuzzify("NEAR");
-            //Console.WriteLine(w4 + "w4");
             double w5 = myAngle.Fuzzify("MEDIUM") * myDistance.Fuzzify("FAR");
-           // Console.WriteLine(w5 + "w5");
             double w6 = myAngle.Fuzzify("MEDIUM") * myDistance.Fuzzify("VERYFAR");
-           // Console.WriteLine(w6 + "w6");
             double w7 = myAngle.Fuzzify("LARGE") * myDistance.Fuzzify("NEAR");
-           // Console.WriteLine(w7 + "w7");
             double w8 = myAngle.Fuzzify("LARGE") * myDistance.Fuzzify("FAR");
-           // Console.WriteLine(w8 + "w8");
             double w9 = myAngle.Fuzzify("LARGE") * myDistance.Fuzzify("VERYFAR");
-           // Console.WriteLine(w9 + "w9");
+
 
             Double temp;
             temp = (w1 * 90) + (w2 * 55) + (w3 * 35) +
@@ -179,13 +154,7 @@ namespace fuzzylogic
             adjangle.Add(new MembershipFunction("S", 10, 20, 25, 35));
             adjangle.Add(new MembershipFunction("VS", 25, 35, 45, 55));
             adjangle.Add(new MembershipFunction("MS", 45, 55, 75, 90));
-            
-            
-            
-            
             myAdjAngle = new LinguisticVariable("ADJANGLE", adjangle);
-
-
         }
 
         public void setRules()
@@ -212,31 +181,30 @@ namespace fuzzylogic
         }
         private void adjustAngle(Double pAngle, Double obstacleDist)
         {
-            
+
             lblStatus.Content = "Obstacle angle: " + pAngle.ToString() + "Dist: " + obstacleDist.ToString();
 
-            Double adjAngle = newDeffuzify(pAngle,obstacleDist);
+            Double adjAngle = newDeffuzify(pAngle, obstacleDist);
 
             if (pAngle > 0) { adjAngle *= -1; }
 
-            if (car.angle + adjAngle > 360) 
+            if (car.angle + adjAngle > 360)
             {
-               Console.WriteLine("Greater than 360");
-                car.angle = (car.angle + adjAngle) - 360; 
-            }
-            else if (car.angle + adjAngle < 0) 
-            {
-                Console.WriteLine("Lesser than 0");
-                car.angle = car.angle + adjAngle + 360; 
-            }
-            else 
-            {
-                Console.WriteLine("Else");
-                car.angle += adjAngle; 
-            }
-            
-        }
 
+                car.angle = (car.angle + adjAngle) - 360;
+            }
+            else if (car.angle + adjAngle < 0)
+            {
+
+                car.angle = car.angle + adjAngle + 360;
+            }
+            else
+            {
+
+                car.angle += adjAngle;
+            }
+
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Rectangle r = new Rectangle();
@@ -246,16 +214,16 @@ namespace fuzzylogic
             Random rand = new Random();
             ImageBrush imgBrush = new ImageBrush();
 
-            imgBrush.ImageSource = new BitmapImage(new Uri( "C:/Users/Peterson/source/repos/fuzzylogic/fuzzylogic/Images/tcone.ico", UriKind.Relative));
+            imgBrush.ImageSource = new BitmapImage(new Uri("Images/tcone.ico", UriKind.Relative));
             imgBrush.Stretch = Stretch.Fill;
             imgBrush.AlignmentX = AlignmentX.Center;
             imgBrush.AlignmentY = AlignmentY.Center;
 
             r.Fill = imgBrush;
             mainCanvas.Children.Add(r);
-            coneListx.Add(rand.Next(100, 550));
-            coneListy.Add(rand.Next(75, 250));
-          
+            coneListx.Add(rand.Next(100, 630));
+            coneListy.Add(rand.Next(75, 320));
+
             Canvas.SetRight(r, coneListx[count]);
             Canvas.SetTop(r, coneListy[count]);
             count++;
@@ -281,17 +249,17 @@ namespace fuzzylogic
                     {
                         adjAngle = pAngle;
                         adjDistance = obstacleDist;
-                       
+
                     }
-                    //adjustAngle(pAngle, obstacleDist);
                 }
-              
+
             }
-      
-            if (adjDistance < 10000) {
-        
+
+            if (adjDistance < 10000)
+            {
+
                 adjustAngle(adjAngle, adjDistance);
-                
+
             }
         }
 
@@ -315,12 +283,6 @@ namespace fuzzylogic
             Canvas.SetTop(sprTarget, p.Y - (sprTarget.ActualHeight / 2));
 
             AnimateCar();
-        }
-
-        private void UpdateStatistics()
-        {
-            lblAngle.Content = car.angle.ToString();
-         ;
         }
     }
 }

@@ -5,26 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:fuzzylogic"
         mc:Ignorable="d"
-        Title="Main Window" Height="420" MouseLeftButtonUp="NewDestination" Width="700" Loaded="btnAnimateClick">
+        Title="JAMES' Obstacle Avoidance and Maneuvering" Height="496.8" MouseLeftButtonUp="NewDestination" Width="779.2" Loaded="btnAnimateClick" Background="#FF942E2E">
 
-    <Canvas x:Name="mainCanvas">
-        
-        
-            <Rectangle x:Name="sprTarget" Width="50" Height="50" Canvas.Right="50" Canvas.Top="37" >
-                <Rectangle.Fill >
-                    <ImageBrush ImageSource="C:/Users/Peterson/source/repos/fuzzylogic/fuzzylogic/Images/Target.png" Stretch="Fill" AlignmentX="Center" AlignmentY="Center" />
-                </Rectangle.Fill>
-            </Rectangle>
-            <Rectangle x:Name="sprCar" Width="50" Height="20" Canvas.Right="50" Canvas.Top="50" >
-                <Rectangle.Fill >
-                    <ImageBrush ImageSource="C:/Users/Peterson/source/repos/fuzzylogic/fuzzylogic/Images/car.png" Stretch="Fill" AlignmentX="Center" AlignmentY="Center" />
-                </Rectangle.Fill>
-            </Rectangle>
-            <Button x:Name="btnAnimate" Click="btnAnimateClick" Content="Animate" Width="80" Height="22" Canvas.Right="20" Canvas.Top="20" Visibility="Hidden" />
-            <Label x:Name ="lblAngle" Width="300" Height="25" Canvas.Top="0" />
-            <Label x:Name ="lblStatus" Width="400" Height="25" Canvas.Bottom="0" />
+    <Canvas x:Name="mainCanvas" Margin="21,30,18.8,25.2">
+        <Canvas.Background>
+            <ImageBrush ImageSource="Images/floor_bg.jpg" Stretch="UniformToFill"/>
+        </Canvas.Background>
+        <Ellipse x:Name="sprTarget" Width="50" Height="50" Canvas.Right="50" Canvas.Top="37" Visibility="Hidden" >
+            <Ellipse.Fill >
+                <ImageBrush ImageSource="/Images/nadineTarget.jpg" Stretch="Fill" AlignmentX="Center" AlignmentY="Center" />
+            </Ellipse.Fill>
+        </Ellipse>
+        <Rectangle x:Name="sprCar" Width="50" Height="40" Canvas.Right="50" Canvas.Top="160" >
+            <Rectangle.Fill >
+                <ImageBrush ImageSource="/Images/robotCar.png" Stretch="Fill" AlignmentX="Center" AlignmentY="Center" />
+            </Rectangle.Fill>
+        </Rectangle>
+        <Button x:Name="btnAnimate" Click="btnAnimateClick" Content="Animate" Width="80" Height="22" Canvas.Right="20" Canvas.Top="20" Visibility="Hidden" />
+        <Label x:Name ="lblStatus" Width="400" Height="25" Canvas.Bottom="0" />
 
-        <Button Content="Add Obstacle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="148" Margin="10,10,0,0" Click="Button_Click"/>
+        <Button Content="Add Obstacle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="148" Click="Button_Click" Canvas.Top="-24">
+            <Button.Background>
+                <SolidColorBrush Color="#FFCEB9B9"/>
+            </Button.Background>
+        </Button>
+
     </Canvas>
 
 </Window>
